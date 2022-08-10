@@ -24,6 +24,7 @@ public class CustomerController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetFiltered([FromQuery]SearchCustomer query)
     {
         var GetCustomerFilterQuery = _mapper.Map<GetCustomerFilterQuery>(query);
@@ -37,6 +38,7 @@ public class CustomerController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Get(Guid customerId)
     {
         var getCustomerQuery = new GetCustomerQuery(customerId);
@@ -52,7 +54,8 @@ public class CustomerController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]    
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Save(CustomerModel customerModel)
     {
         var createCustomerCommand = _mapper.Map<CreateCustomerCommand>(customerModel);
@@ -71,6 +74,7 @@ public class CustomerController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Update(Guid customerId, CustomerModel customerModel)
     {
         customerModel.CustomerId = customerId;

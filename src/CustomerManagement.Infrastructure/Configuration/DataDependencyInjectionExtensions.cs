@@ -18,10 +18,10 @@ public static class DataDependencyInjectionExtensions
         services.AddDbContext<CustomerManagementDbContext>(
             options =>
             {
-                options
-                .UseSqlServer(
+                options.UseSqlServer(
                     configuration.GetConnectionString("CustomerManagementSqlServer"),
                     options => options.EnableRetryOnFailure());
+                options.EnableSensitiveDataLogging();
             }, optionsLifetime: ServiceLifetime.Transient);
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();

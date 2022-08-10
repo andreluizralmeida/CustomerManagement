@@ -12,7 +12,7 @@ public class DependencyTest : BaseTest
     {
         // Arrange
         // Act
-        var result = types.That().ResideInNamespace("Farfetch.LookupService.Api.Controllers")
+        var result = types.That().ResideInNamespaceStartingWith("CustomerManagement.Api.Controllers")
             .Should().NotHaveDependencyOn("CustomerManagement.Infrastructure").GetResult();
 
         // Assert
