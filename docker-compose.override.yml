@@ -1,0 +1,36 @@
+version: '3.4'
+
+name: CustomerManagementApiCompose
+
+networks:
+  customer-management-network:
+    driver: bridge
+
+services:
+  customermanagement.api:
+    container_name: CustomerManagementApi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - sqlserver
+    networks:
+      - customer-management-network
+  
+  sqlserver:
+    container_name: CustomerManagementDb
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password_123!@#
+    networks:
+      - customer-management-network
