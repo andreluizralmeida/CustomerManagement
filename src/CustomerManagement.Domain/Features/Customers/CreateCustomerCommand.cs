@@ -16,8 +16,11 @@ public class CreateCustomerCommand : Command<Result<Guid>>
     {
         AddNotifications(new Contract()
             .IsNotNullOrEmpty(firstName, nameof(firstName), "First Name is required")
+            .IsLowerThan(firstName.Length,50,  nameof(firstName), "First name must be lower than 50")
             .IsNotNullOrEmpty(surname, nameof(surname), "Surname is required")
+            .IsLowerThan(surname.Length, 50, nameof(firstName), "Surname must be lower than 50")
             .IsNotNullOrEmpty(email, nameof(email), "Email is required")
+            .IsLowerThan(email.Length, 100, nameof(firstName), "Email be lower than 100")
             .IsNotNullOrEmpty(password, nameof(password), "Password is required")
             .IsEmail(email, nameof(email), "Invalid Email")); 
 

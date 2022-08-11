@@ -19,6 +19,10 @@ public class UpdateCustomerCommand : Command<Result>
                 customerId,
                 nameof(customerId),
                 $"Property {nameof(customerId)} is empty,")
+            .IsEmail(email, nameof(email), "Invalid Email")
+            .IsLowerThan(firstName.Length, 50, nameof(firstName), "First name must be lower than 50")
+            .IsLowerThan(surname.Length, 50, nameof(firstName), "Surname must be lower than 50")
+            .IsLowerThan(email.Length, 100, nameof(firstName), "Email be lower than 100")
             );
 
         if (string.IsNullOrEmpty(firstName) && 
