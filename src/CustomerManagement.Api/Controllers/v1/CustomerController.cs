@@ -55,6 +55,7 @@ public class CustomerController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Save(CustomerModel customerModel)
     {
@@ -66,6 +67,11 @@ public class CustomerController : ControllerBase
         }
 
         var result = await _mediator.Send(createCustomerCommand);
+
+        if (result.IsFailed)
+        {
+            return result.AsActionResult();
+        }
 
         return result.AsActionResult("GetCustomerById", new { customerId = result.Value });
     }

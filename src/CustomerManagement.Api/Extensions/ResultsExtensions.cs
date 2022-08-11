@@ -80,6 +80,15 @@ public static class ResultsExtensions
             return new NotFoundObjectResult(new { notFound.Message });
         }
 
+        var alreadyExists = result.Errors.Find(error =>
+            error.Metadata.ContainsKey(Type)
+            && error.Metadata.ContainsValue(Errors.AlreadyExistsMetadata));
+
+        if (alreadyExists != null)
+        {
+            return new ConflictObjectResult(new { alreadyExists.Message });
+        }
+
         var errorMessages = result.Errors.Select(e => e.Message).ToArray();
         return (ObjectResult)BadRequestError(errorMessages);
     }

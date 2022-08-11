@@ -31,10 +31,14 @@ builder.Services.AddSwaggerGen();
 var serviceProvider = builder.Services.BuildServiceProvider();
 var context = serviceProvider.GetService<CustomerManagementDbContext>();
 
-context.Database.Migrate();
-
 //App
 var app = builder.Build();
+
+#if !DEBUG
+
+context.Database.Migrate();
+
+#endif
 
 app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseSwagger();

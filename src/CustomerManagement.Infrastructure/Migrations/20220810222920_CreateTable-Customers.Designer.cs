@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(CustomerManagementDbContext))]
-    [Migration("20220810095537_CreateTable-Customer")]
-    partial class CreateTableCustomer
+    [Migration("20220810222920_CreateTable-Customers")]
+    partial class CreateTableCustomers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,11 @@ namespace CustomerManagement.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("FirstName");
 
                     b.ToTable("Customers");
                 });

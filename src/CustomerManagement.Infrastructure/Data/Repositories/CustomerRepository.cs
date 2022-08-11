@@ -1,8 +1,6 @@
 ﻿namespace CustomerManagement.Infrastructure.Data.Repositories;
 
 using AspNetCore.IQueryable.Extensions;
-using AspNetCore.IQueryable.Extensions.Filter;
-using AspNetCore.IQueryable.Extensions.Pagination;
 using CustomerManagement.Domain.Common;
 using CustomerManagement.Domain.Entities;
 using CustomerManagement.Domain.Features.Customers;
@@ -16,6 +14,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 {
     private readonly ILogger<CustomerRepository> logger;
     const string NotFoundMessage = "No Customer was found.";
+    const string DuplicateKey = "Cannot insert duplicate key";
 
     public CustomerRepository(CustomerManagementDbContext dbContext, ILogger<CustomerRepository> logger) : base(dbContext)
     {
@@ -40,7 +39,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
         }
         catch (Exception ex)
         {            
-            return LogAndReturnErrorMessage(ex, "Error getting Customer by Filters");
+            return LogAndReturnGenericErrorMessage(ex, "Error getting Customer by Filters");
         }
     }
 
@@ -62,7 +61,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
         }
         catch (Exception ex)
         {
-            return LogAndReturnErrorMessage(ex, "Error getting Customer by customerId", () => new { customerId });
+            return LogAndReturnGenericErrorMessage(ex, "Error getting Customer by customerId", () => new { customerId });
         }
     }
 
@@ -76,14 +75,26 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
         }
         catch (Exception ex)
         {
-            return LogAndReturnErrorMessage(ex, "Error saving Customer", () => new { CustomerId = customer.Id });
-        }        
+            if (ex.InnerException.Message.Contains(DuplicateKey))
+            {
+                return LogAndReturnAlreadyExistErrorMessage(ex, "This Email already exists", customer.Email);
+            }
+
+            return LogAndReturnGenericErrorMessage(ex, "Error saving Customer", () => new { CustomerId = customer.Id });
+        }
     }
 
-    private Result LogAndReturnErrorMessage(Exception ex, string errorMessage, params object?[] args)
+    private Result LogAndReturnGenericErrorMessage(Exception ex, string errorMessage, params object?[] args)
     {
         this.logger.LogError(errorMessage, ex, args);
 
         return Result.Fail(new Error(errorMessage).CausedBy(ex));
+    }
+
+    private Result LogAndReturnAlreadyExistErrorMessage(Exception ex, string errorMessage, params object?[] args)
+    {
+        this.logger.LogError(errorMessage, ex, args);
+
+        return Result.Fail(Errors.General.AlreadyExists(errorMessage).CausedBy(ex));
     }
 }

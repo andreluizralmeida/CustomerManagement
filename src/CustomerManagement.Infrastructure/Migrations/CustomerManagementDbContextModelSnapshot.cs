@@ -49,6 +49,11 @@ namespace CustomerManagement.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("FirstName");
+
                     b.ToTable("Customers");
                 });
 #pragma warning restore 612, 618

@@ -1,10 +1,10 @@
 ﻿namespace CustomerManagement.Infrastructure.Migrations;
 
-using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
-public partial class CreateTableCustomer : Migration
+
+public partial class CreateTableCustomers : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)
     {
@@ -24,22 +24,20 @@ public partial class CreateTableCustomer : Migration
             });
 
         migrationBuilder.CreateIndex(
-            name: "IX_Customers_FirstName",
+            name: "IX_Customers_Email",
             table: "Customers",
-            column: "FirstName"
-            );
+            column: "Email",
+            unique: true);
 
         migrationBuilder.CreateIndex(
-          name: "IX_Customers_Surname",
-          table: "Customers",
-          column: "Surname"
-          );
+            name: "IX_Customers_FirstName",
+            table: "Customers",
+            column: "FirstName");
     }
 
     protected override void Down(MigrationBuilder migrationBuilder)
     {
-        migrationBuilder.DropIndex(name: "IX_Customers_FirstName");
-        migrationBuilder.DropIndex(name: "IX_Customers_Surname");
-        migrationBuilder.DropTable(name: "Customers");
+        migrationBuilder.DropTable(
+            name: "Customers");
     }
 }
