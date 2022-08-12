@@ -46,9 +46,9 @@ thought CMD, enter in the folder of the cloned project (CustomerManagement) and 
 docker compose up
 ```
 
-Open the browser and type this URL: https://localhost:443/swagger/index.html
+Open the browser and type this URL: http://localhost/swagger/index.html
 
-![image](https://user-images.githubusercontent.com/6225842/184012604-b2482a7a-b64e-48c0-acfc-cebcb75f4489.png)
+![image](https://user-images.githubusercontent.com/6225842/184368543-a03c0c98-94ea-4366-8977-70af3b109ac0.png)
 
 ✅ That's it! You now ready to use the customer management!
 
@@ -59,10 +59,6 @@ Open the browser and type this URL: https://localhost:443/swagger/index.html
 You can use the api through the swagger page or any API Client as postman or Insomnia
 
 <h4>Swagger</h4>
-
-Open the browser and type this URL: https://localhost:443/swagger/index.html
-
-![image](https://user-images.githubusercontent.com/6225842/184047086-4f62b47d-1c34-4708-9299-52584e61173d.png)
 
 > Choose which operation you want to do.
 
