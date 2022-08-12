@@ -34,11 +34,13 @@ var context = serviceProvider.GetService<CustomerManagementDbContext>();
 //App
 var app = builder.Build();
 
-#if !DEBUG
-
-context.Database.Migrate();
-
-#endif
+try
+{
+    context.Database.Migrate();
+}
+catch (Exception)
+{
+}
 
 app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseSwagger();
