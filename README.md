@@ -75,6 +75,8 @@ Open the browser and type this URL: https://localhost:443/swagger/index.html
 ![image](https://user-images.githubusercontent.com/6225842/184047337-4e9c9bdb-9467-4fff-bb91-459c33fd935c.png)
 
 ![image](https://user-images.githubusercontent.com/6225842/184047502-5bd46268-5ec2-4ac6-943e-8aa37bd4563e.png)
+	
+![image](https://user-images.githubusercontent.com/6225842/184093034-67db0317-8af2-4e45-96d9-b541f1503320.png)
 
 </details>
 
