@@ -1,9 +1,10 @@
+
 <h1 align="center"> 
 	Customer Management
 </h1>
 
 <p align="center">
- <a href="#-about-the-project">Sobre</a> •
+ <a href="#-about-the-project">About</a> •
  <a href="#-functionalities">Functionalities</a> •
  <a href="#-how-to-execute">How to execute</a> • 
  <a href="#-technologies">Technologies</a> • 
@@ -20,8 +21,8 @@ This is an API to manage the customers
 ### ⚙️ Functionalities
 
 - [x] Save a new customer
-- [x] retrieve customers informations by Id and by filter
-- [x] Update customers informations
+- [x] Retrieve customer's information by Id and by filter
+- [x] Update customer's information
 
 ---
 
@@ -40,7 +41,7 @@ Clone the project
 git clone https://github.com/andreluizralmeida/CustomerManagement.git
 ```
 
-thought CMD, enter in the folder of the cloned project (CustomerManagement) and run the docker compose command
+through CMD, enter in the folder of the cloned project (CustomerManagement) and run the docker compose command
 
 ```bash
 docker compose up
@@ -50,19 +51,18 @@ Open the browser and type this URL: http://localhost/swagger/index.html
 
 ![image](https://user-images.githubusercontent.com/6225842/184368543-a03c0c98-94ea-4366-8977-70af3b109ac0.png)
 
-✅ That's it! You now ready to use the customer management!
+✅ That's it! Now you are ready to use the customer management project!
 
 ---
 
 ### 👨‍💻 How to use it
 
-You can use the api through the swagger page or any API Client as postman or Insomnia
+You can use the API through Swagger page or any API Client like Postman or Insomnia
 
 <h4>Swagger</h4>
 
 > Choose which operation you want to do.
-
-<h3>For create a new Customer</h3>
+<h3>Creating a new Customer</h3>
 
 <details>
 
@@ -76,7 +76,7 @@ You can use the api through the swagger page or any API Client as postman or Ins
 
 </details>
 
-<h3>To get a customer by Id </h3>
+<h3>Searching a customer by Id </h3>
 
 <details>
 
@@ -88,7 +88,7 @@ You can use the api through the swagger page or any API Client as postman or Ins
 
 </details>
 
-<h3>To get customers by filter</h3>
+<h3>Searching a customer by filter</h3>
 
 <details>
 
@@ -103,7 +103,7 @@ You can use the api through the swagger page or any API Client as postman or Ins
 
 </details>
 
-<h3>To update a customer</h3>
+<h3>Updating customer information</h3>
 
 <details>
 
@@ -119,7 +119,7 @@ You can use the api through the swagger page or any API Client as postman or Ins
 
 ### 🛠 Technologies
 
-The following Technologies were used to make the project
+The following Technologies were used to build this project
 
 - .NET 6
 - DDD
@@ -142,16 +142,17 @@ The following Technologies were used to make the project
 
 > Deploy to a live environment;
 
-Write a yml file with deployment instructions through kubernete or jenkins and etc
+Write a .yml file with deployment instructions through Kubernete or Jenkins and etc
 
-> Handle a large volume of requests, including concurrent creation and update operations
+> Handle large volumes of requests, including concurrent creation and update operations
 
-Using some load balancer, like nginx and transaction or implements Semaphore
+Using some load balancer, like Nginx and transaction or implements Semaphore
 
 > Continue operating in the event of problems reading and writing from the database
 
-Implement Resilience Techniques using Hangfire to create a job to retry a fail command. Or Implement some message-broker like kafka or rabbitMQ to process on demand
+Implement Resilience Techniques using Hangfire to create a job to retry a fail command. Or Implement some message-broker like Kafka or rabbitMQ to process on demand
 
 > Ensure the security of the user information
 
 Add authentication, add SSL, Encrypt sensitive data and not logging de sensitive data
+
