@@ -11,14 +11,14 @@ services:
     container_name: CustomerManagementApi
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password123
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/dev_cert.pfx
     ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
+      - "80:80"      
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro      
     depends_on:
       - sqlserver
     networks:
